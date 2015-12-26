@@ -1,0 +1,50 @@
+Dynamic binding is a way how to assign filters and interceptors to the resource methods in a dynamic manner. Name binding uses a static approach and changes to binding require source code change and recompilation. With dynamic binding you can implement code which defines bindings during the application initialization time. Example - 
+
+
+@Provider
+public class PoweredByDynamicBindingProvider implements DynamicFeature {
+
+	@Override
+	public void configure(ResourceInfo resourceInfo, FeatureContext context) {
+		
+		if( MyResource.class.equals(resourceInfo.getResourceClass())  ) {
+			
+			// If any resource method of MyResource resource class contains 'PoweredBy' string in it's name, 
+			// PoweredByResponseFilter will be attached to that resource method.
+			if( resourceInfo.getResourceMethod().getName().contains("PoweredBy") ) {
+				System.out.println(resourceInfo.getResourceMethod().getName());
+				context.register(PoweredByResponseFilter.class);
+			} 
+			
+			// If any resource method of MyResource resource class is annotated with '@SupportedBy' annotation, 
+			// SupportedByResponseFilter will be attached to that resource method.
+			if(resourceInfo.getResourceMethod().isAnnotationPresent(SupportedBy.class)) {
+				context.register(SupportedByResponseFilter.class);
+			}
+		}
+	}
+
+}
+
+
+
+@Path("messages")
+public class MyResource {
+	
+	@GET
+	@SupportedBy		// FeatureContext registers  SupportedByResponseFilter filter with this resource method.
+	@Path("hello")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String hello() {							
+		return "Hello JAX-RS";
+	}
+	
+	@GET
+	@Path("hi")			// FeatureContext registers  PoweredByResponseFilter filter with this resource method.
+	@Produces(MediaType.TEXT_PLAIN)
+	public String hiPoweredBy() {						
+		return "Hi JAX-RS";
+	}
+}
+
+Same applies to interceptors as well.

@@ -1,0 +1,35 @@
+Filters and interceptors can be categorized into following 2 categories - 
+	1. Global 		- Applied to all resource methods.
+	2. Name-Bound 	- Applied to certain resource methods.
+
+Filters and interceptors can be name-bound. Name binding is a concept that allows to say to a JAX-RS runtime that a specific filter or interceptor will be executed only for a specific resource method. When a filter or an interceptor is limited only to a specific resource method we say that it is name-bound. Filters and interceptors that do not have such a limitation are called global.
+
+Filter or interceptor can be assigned to a resource method using the @NameBinding annotation. The annotation is used as meta annotation for other user implemented annotations that are applied to a providers and resource methods. For example - 
+
+@NameBinding
+@Retention(RetentionPolicy.RUNTIME)
+public @interface PoweredBy {
+}
+
+
+@Provider
+@PoweredBy
+public class PoweredByResponseFilter implements ContainerResponseFilter {
+	public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
+		......
+		......
+	}
+}
+
+Now 'PoweredByResponseFilter' will be applied to only those resource methods which are annotated with @PoweredBy.
+
+@GET
+@Path("hi")
+@PoweredBy
+@Produces(MediaType.TEXT_PLAIN)
+public String hi() {						
+	......
+	......
+}
+
+Same applied to interceptors as well.

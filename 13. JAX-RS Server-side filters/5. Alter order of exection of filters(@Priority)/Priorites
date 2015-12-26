@@ -1,0 +1,15 @@
+In case you register more filters and interceptors you might want to define an exact order in which they should be invoked. The order can be controlled by the @Priority annotation defined by the javax.annotation.Priority class. The annotation accepts an integer parameter of priority. Providers used in request processing (ContainerRequestFilter, ClientRequestFilter) as well as entity interceptors (ReaderInterceptor, WriterInterceptor) are sorted based on the priority in an ascending manner. So, a request filter with priority defined with @Priority(1000) will be executed before another request filter with priority defined as @Priority(2000). Providers used during response processing (ContainerResponseFilter, ClientResponseFilter) are executed in the reverse order (using descending manner), so a provider with the priority defined with @Priority(2000) will be executed before another provider with priority defined with @Priority(1000).
+
+It's a good practice to assign a priority to filters and interceptors. Use Priorities class which defines standardized priorities in JAX-RS for different usages, rather than inventing your own priorities. So, when you for example write an authentication filter you would assign a priority 1000 which is the value of Priorities.AUTHENTICATION.
+
+@Provider
+@Priority(Priorities.AUTHENTICATION)	// 1000
+public class PoweredByFilter implements ContainerResponseFilter, ContainerRequestFilter {
+	.......
+}
+
+@Provider
+@Priority(Priorities.HEADER_DECORATOR)	// 3000
+public class SupportedByFilter implements ContainerResponseFilter, ContainerRequestFilter {
+	.......
+}

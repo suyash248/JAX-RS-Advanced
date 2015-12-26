@@ -1,0 +1,145 @@
+POST: http://localhost:8080/RestAdvance/v1/date
+
+CASE-1 :
+
+	Headers-
+	Content-Type: 	text/plain
+	Accept: 		text/plain
+
+	Request Body-
+		20-12-2015
+
+	Response Body-
+		20-12-2015
+
+
+CASE-2 :
+
+	Headers-
+	Content-Type: 	text/plain
+	Accept: 		text/csv
+
+	Request Body-
+		20-12-2015
+
+	Response Body-
+		20, 12, 2015
+
+
+CASE-3 :
+
+	Headers-
+	Content-Type: 	text/plain
+	Accept: 		application/json
+
+	Request Body-
+		20-12-2015
+
+	Response Body-
+		{
+		    "day": 20,
+		    "month": 12,
+		    "year": 2015
+		} 
+
+
+CASE-4 :
+
+	Headers-
+	Content-Type: 	text/csv
+	Accept: 		text/plain
+
+	Request Body-
+		20, 12, 2015
+
+	Response Body-
+		20-12-2015
+
+
+CASE-5 :
+
+	Headers-
+	Content-Type: 	text/csv
+	Accept: 		text/csv
+
+	Request Body-
+		20, 12, 2015
+
+	Response Body-
+		20, 12, 2015
+
+
+CASE-6 :
+
+	Headers-
+	Content-Type: 	text/csv
+	Accept: 		application/json
+
+	Request Body-
+		20, 12, 2015
+
+	Response Body-
+		{
+		    "day": 20,
+		    "month": 12,
+		    "year": 2015
+		} 
+
+
+
+CASE-7 :
+
+	Headers-
+	Content-Type: 	application/json
+	Accept: 		text/plain
+
+	Request Body-
+		{
+		    "day": 20,
+		    "month": 12,
+		    "year": 2015
+		} 
+		
+
+	Response Body-
+		20-12-2015
+
+
+CASE-8 :
+
+	Headers-
+	Content-Type: 	application/json
+	Accept: 		text/csv
+
+	Request Body-
+		{
+		    "day": 20,
+		    "month": 12,
+		    "year": 2015
+		} 
+		
+
+	Response Body-
+		20, 12, 2015
+
+
+CASE-8 :
+
+	Headers-
+	Content-Type: 	application/json
+	Accept: 		application/json
+
+	Request Body-
+		{
+		    "day": 20,
+		    "month": 12,
+		    "year": 2015
+		} 
+		
+
+	Response Body-
+		{
+		    "day": 20,
+		    "month": 12,
+		    "year": 2015
+		} 

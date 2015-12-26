@@ -1,0 +1,32 @@
+MessageBodyWriter - 
+	MessageBodyWriter's job is to convert the java object to specific media type(e.g. text/plain, application/json etc.), And write it to response body. Example - 
+
+	@GET
+	@Produces(MediaType.TEXT_PLAIN)
+	public MyObject test() {
+		......
+		......
+		return new MyObject();
+	}
+
+	In this case, There must be a MessageBodyWriter, which converts the 'MyObject' instance to 'text/plain' (i.e. String) media type. And writes it to response body.
+
+
+MessageBodyReader - 
+	MessageBodyReader's job is to read the content sent as request body, And converts it to specific java object. Example -
+
+	@POST
+	@Consumes(MediaType.TEXT_PLAIN)
+	public void test(MyObject myObject) {
+		.......
+		.......
+	}
+
+	POST request body - 
+		"This is my object as String."
+
+	In this case, There must be a MessageBodyReader, which reads the request body(as text/plain i.e. String) and converts it to 'MyObject'.
+
+
+MessageBodyReaders/Writers v/s ParamConverters-
+	MessageBodyReaders/Writers deal with request/response body. While on the other hand ParamConverters deal with request parameters(e.g. PathParam, HeaderParam, QueryParam, CookieParam etc.).
