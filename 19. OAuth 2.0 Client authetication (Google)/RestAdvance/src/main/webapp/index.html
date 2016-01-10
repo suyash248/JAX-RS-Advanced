@@ -1,0 +1,38 @@
+<html>
+<head>
+    <!-- Bootstrap -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-offset-2 col-lg-8">
+            <header class="page-header">
+                <h1>Enter your Client Id and Secret:</h1>
+            </header>
+
+            <form class="form-group" method="get" action="v1/setup">
+                <div class="input-group input-group-lg">
+                    <div class="form-group">
+                        <input class="form-control input-lg" type="text" size="200" placeholder="Client Id" name="clientId" autofocus/>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control input-lg" type="text" size="200" placeholder="Client Secret" name="clientSecret"
+                               />
+                    </div>
+                    <div class="form-group">
+                        <!--<span class="input-group-btn">-->
+                        <button class="btn btn-info btn-lg" type="submit">OK</button>
+                        <!--</span>-->
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>
